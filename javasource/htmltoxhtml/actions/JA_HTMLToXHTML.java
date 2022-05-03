@@ -38,7 +38,7 @@ public class JA_HTMLToXHTML extends CustomJavaAction<java.lang.String>
 		// BEGIN USER CODE
 		org.jsoup.nodes.Document document = Jsoup.parse(HTML);
 		document.outputSettings().syntax(org.jsoup.nodes.Document.OutputSettings.Syntax.xml); 
-	    return document.toString();
+	    	return document.toString();
 		// END USER CODE
 	}
 
