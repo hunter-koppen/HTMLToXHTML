@@ -11,11 +11,7 @@ package htmltoxhtml.actions;
 
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
-import javax.swing.text.Document;
 import org.jsoup.*;
-import org.jsoup.select.Elements;
-import org.jsoup.parser.Parser;
-import org.jsoup.nodes.*;
 
 /**
  * For document templates xhtml is required, html might not always be parsed correctly. This java action parses html to xhtml. 
@@ -36,9 +32,11 @@ public class JA_HTMLToXHTML extends CustomJavaAction<java.lang.String>
 	public java.lang.String executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		org.jsoup.nodes.Document document = Jsoup.parse(HTML);
-		document.outputSettings().syntax(org.jsoup.nodes.Document.OutputSettings.Syntax.xml); 
-	    	return document.toString();
+		org.jsoup.nodes.Document document = Jsoup.parseBodyFragment(HTML);
+		document.outputSettings().escapeMode(org.jsoup.nodes.Entities.EscapeMode.xhtml);
+        document.outputSettings().syntax(org.jsoup.nodes.Document.OutputSettings.Syntax.xml); //This will ensure the validity
+        document.outputSettings().charset("UTF-8");
+	    return document.toString();
 		// END USER CODE
 	}
 
